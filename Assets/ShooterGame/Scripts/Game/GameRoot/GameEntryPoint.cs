@@ -1,5 +1,6 @@
 using System.Collections;
 using ShooterGame.Scripts.Game.Gameplay.Root;
+using ShooterGame.Scripts.Game.MainMenu.Root;
 using UnityEngine;
 using ShooterGame.Scripts.Utils;
 using UnityEngine.SceneManagement;
@@ -40,6 +41,11 @@ namespace ShooterGame.Scripts
                 return;
             }
 
+            if (sceneName == ScenesNames.MAIN_MENU)
+            {
+                _coroutines.StartCoroutine(LoadAndStartMainMenu());
+            }
+
             if (sceneName != ScenesNames.BOOT)
             {
                 return;
@@ -59,7 +65,32 @@ namespace ShooterGame.Scripts
             yield return new WaitForSeconds(1);
             
             var sceneEntryPoint = Object.FindFirstObjectByType<GameplayEntryPoint>();
-            sceneEntryPoint.Run();
+            sceneEntryPoint.Run(_uiRoot);
+
+            sceneEntryPoint.GoToMainMenuSceneRequested += () =>
+            {
+                _coroutines.StartCoroutine(LoadAndStartMainMenu());
+            };
+            
+            _uiRoot.HideLoadingScreen();
+        }
+        
+        private IEnumerator LoadAndStartMainMenu()
+        {
+            _uiRoot.ShowLoadingScreen();
+
+            yield return LoadScene(ScenesNames.BOOT);
+            yield return LoadScene(ScenesNames.MAIN_MENU);
+
+            yield return new WaitForSeconds(1);
+            
+            var sceneEntryPoint = Object.FindFirstObjectByType<MainMenuEntryPoint>();
+            sceneEntryPoint.Run(_uiRoot);
+
+            sceneEntryPoint.GoToGameplaySceneRequested += () =>
+            {
+                _coroutines.StartCoroutine(LoadAndStartGameplay());
+            };
             
             _uiRoot.HideLoadingScreen();
         }
