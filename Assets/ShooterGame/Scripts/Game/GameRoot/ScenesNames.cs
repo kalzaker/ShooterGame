@@ -1,4 +1,4 @@
-namespace ShooterGame.Scripts
+namespace ShooterGame.Scripts.Game.GameRoot
 {
     public static class ScenesNames
     {

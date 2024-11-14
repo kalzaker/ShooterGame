@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ShooterGame.Scripts
+namespace ShooterGame.Scripts.Game.GameRoot
 {
     public class UIRootView : MonoBehaviour
     {

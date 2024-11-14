@@ -1,11 +1,12 @@
 using System.Collections;
+using R3;
 using ShooterGame.Scripts.Game.Gameplay.Root;
 using ShooterGame.Scripts.Game.MainMenu.Root;
-using UnityEngine;
 using ShooterGame.Scripts.Utils;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ShooterGame.Scripts
+namespace ShooterGame.Scripts.Game.GameRoot
 {
     public class GameEntryPoint
     {
@@ -37,7 +38,8 @@ namespace ShooterGame.Scripts
 
             if (sceneName == ScenesNames.GAMEPLAY)
             {
-                _coroutines.StartCoroutine(LoadAndStartGameplay());
+                var enterParams = new GameplayEnterParams("ddd.save", 1);
+                _coroutines.StartCoroutine(LoadAndStartGameplay(enterParams));
                 return;
             }
 
@@ -52,10 +54,10 @@ namespace ShooterGame.Scripts
             }
 #endif
 
-            _coroutines.StartCoroutine(LoadAndStartGameplay());
+            _coroutines.StartCoroutine(LoadAndStartMainMenu());
         }
 
-        private IEnumerator LoadAndStartGameplay()
+        private IEnumerator LoadAndStartGameplay(GameplayEnterParams enterParams)
         {
             _uiRoot.ShowLoadingScreen();
 
@@ -65,17 +67,15 @@ namespace ShooterGame.Scripts
             yield return new WaitForSeconds(1);
             
             var sceneEntryPoint = Object.FindFirstObjectByType<GameplayEntryPoint>();
-            sceneEntryPoint.Run(_uiRoot);
-
-            sceneEntryPoint.GoToMainMenuSceneRequested += () =>
+            sceneEntryPoint.Run(_uiRoot, enterParams).Subscribe(gameplayExitParams =>
             {
-                _coroutines.StartCoroutine(LoadAndStartMainMenu());
-            };
+                _coroutines.StartCoroutine(LoadAndStartMainMenu(gameplayExitParams.MainMenuEnterParams));
+            });
             
             _uiRoot.HideLoadingScreen();
         }
         
-        private IEnumerator LoadAndStartMainMenu()
+        private IEnumerator LoadAndStartMainMenu(MainMenuEnterParams enterParams = null)
         {
             _uiRoot.ShowLoadingScreen();
 
@@ -85,12 +85,15 @@ namespace ShooterGame.Scripts
             yield return new WaitForSeconds(1);
             
             var sceneEntryPoint = Object.FindFirstObjectByType<MainMenuEntryPoint>();
-            sceneEntryPoint.Run(_uiRoot);
-
-            sceneEntryPoint.GoToGameplaySceneRequested += () =>
+            sceneEntryPoint.Run(_uiRoot, enterParams).Subscribe(mainMenuExitParams =>
             {
-                _coroutines.StartCoroutine(LoadAndStartGameplay());
-            };
+                var targetSceneName = mainMenuExitParams.TargetSceneEnterParams.SceneName;
+
+                if (targetSceneName == ScenesNames.GAMEPLAY)
+                {
+                    _coroutines.StartCoroutine(LoadAndStartGameplay(mainMenuExitParams.TargetSceneEnterParams.As<GameplayEnterParams>()));
+                }
+            });
             
             _uiRoot.HideLoadingScreen();
         }

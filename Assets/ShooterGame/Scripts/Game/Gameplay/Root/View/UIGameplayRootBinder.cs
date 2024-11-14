@@ -1,16 +1,19 @@
-using System;
+using R3;
 using UnityEngine;
 
 namespace ShooterGame.Scripts.Game.Gameplay.Root.View
 {
     public class UIGameplayRootBinder : MonoBehaviour
     {
-        public event Action GoToMainMenuButtonClicked;
-
+        private Subject<Unit> _exitSceneSignalSubj;
         public void HandleGoToMainMenuButtonClick()
         {
-            GoToMainMenuButtonClicked?.Invoke();
+            _exitSceneSignalSubj?.OnNext(Unit.Default);
         }
-        
+
+        public void Bind(Subject<Unit> exitSceneSignalSubj)
+        {
+            _exitSceneSignalSubj = exitSceneSignalSubj;
+        }
     }
 }
