@@ -1,5 +1,6 @@
 using UnityEngine;
 using R3;
+using ShooterGame.Scripts.DI;
 using ShooterGame.Scripts.Game.Gameplay.Root;
 using ShooterGame.Scripts.Game.GameRoot;
 using ShooterGame.Scripts.Game.MainMenu.Root.View;
@@ -11,8 +12,13 @@ namespace ShooterGame.Scripts.Game.MainMenu.Root
     {
         [SerializeField] private UIMainMenuRootBinder _sceneUIRootPrefab;
 
-        public Observable<MainMenuExitParams> Run(UIRootView uiRoot, MainMenuEnterParams enterParams)
+        public Observable<MainMenuExitParams> Run(DIContainer mainMenuContainer, MainMenuEnterParams enterParams)
         {
+            MainMenuRegistrations.Register(mainMenuContainer, enterParams);
+            var mainMenuViewModelsContainer = new DIContainer(mainMenuContainer);
+            MainMenuViewModelsRegistrations.Register(mainMenuViewModelsContainer);
+            
+            var uiRoot = mainMenuContainer.Resolve<UIRootView>();
             var uiScene = Instantiate(_sceneUIRootPrefab);
             uiRoot.AttachSceneUI(uiScene.gameObject);
 
