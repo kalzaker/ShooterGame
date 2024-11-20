@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,11 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 4f;
     [SerializeField] private float sprintSpeed = 6f;
     [SerializeField] private float acceleration = 10f;
-
+    
     [Header("Jumping")]
-    private readonly float _jumpForce = 5f;
+    [SerializeField] private float jumpForce = 5f;
 
-    [Header("Keybinds")]
+    [Header("Keybindings")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
 
@@ -94,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded)
         {
             _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
-            _rigidbody.AddForce(transform.up * _jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
     }
 
