@@ -10,7 +10,7 @@ namespace Fragsurf.Movement {
     /// </summary>
     [AddComponentMenu ("Fragsurf/Surf Character")]
     public class SurfCharacter : MonoBehaviour, ISurfControllable {
-
+        
         public enum ColliderType {
             Capsule,
             Box
