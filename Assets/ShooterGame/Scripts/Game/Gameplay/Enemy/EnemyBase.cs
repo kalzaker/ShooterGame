@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private float currentHP = 100f;
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(float damage)
     {
-        
+        currentHP -= damage;
+
+        if (currentHP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
