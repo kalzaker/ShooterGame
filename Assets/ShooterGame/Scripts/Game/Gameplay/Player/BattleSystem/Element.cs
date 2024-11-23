@@ -4,34 +4,47 @@ using UnityEngine;
 public class Element
 {
     [SerializeField] GameObject meleeAttackPrefab;
-    [SerializeField] GameObject rangeAttackPrefab;
-    [SerializeField] Effect effect;
+    [SerializeField] public GameObject projectile;
+    [SerializeField] public Effect effect;
+    [SerializeField] Caster caster;
 
     public string elementName;
 
     public float meleedamage, meleeRange;
 
-    public float rangeDamage;
+    public float attackCooldown;
 
-    float attackCooldown;
-
-    float currentCooldown;
+    public float currentCooldown;
 
     public float manacost;
 
-    public virtual void MeleeAttack(){
+    public bool attackReady;
 
-    }
+    [Header("Projectile settings")]
+    public int rangeDamage; 
+    public float projectileSpeed;
 
-    public virtual void RangeAttack(){
+    public bool bounces, explodes, affectedByGravity;
 
-    }
+    public int bounceNumber;
+
+    public GameObject explosionVFX;
+
+    public float explosionRange;
 
     public void CalculateCooldown(float value){
-        attackCooldown += value;
+        if(currentCooldown >= attackCooldown){
+
+            attackReady = true;
+            return;
+        }
+        currentCooldown += value;
+
     }
 
-    public void CauseEffect(GameObject target){
-        target.AddComponent<Effect>();
+    public void StartCoolDown(){
+        currentCooldown = 0;
+        
+        attackReady = false;
     }
 }

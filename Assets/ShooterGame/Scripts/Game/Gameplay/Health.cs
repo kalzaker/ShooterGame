@@ -10,9 +10,9 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int value){
         currentHp -= value;
-        if(currentHp >= maxHp)
+        if(currentHp <= 0)
         {
-            currentHp = maxHp;
+            Destroy(gameObject);
         }
     }
 

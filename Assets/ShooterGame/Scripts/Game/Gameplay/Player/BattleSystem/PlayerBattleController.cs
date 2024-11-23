@@ -14,6 +14,8 @@ public class PlayerBattleController : MonoBehaviour
         }
     }
 
+    Caster caster;
+
     public float mana, maxMana;
 
     [SerializeField] Element[] elements;
@@ -23,6 +25,7 @@ public class PlayerBattleController : MonoBehaviour
     int currentElementNumber;
 
     void Start(){
+        caster = GetComponent<Caster>();
         mana = maxMana;
         currentElement = elements[0];
         currentElementNumber = 0;
@@ -31,32 +34,32 @@ public class PlayerBattleController : MonoBehaviour
     void Update(){
         PerformMeleeAttack();
         PerformRangeAttack();
+        SwapElements();
+        CalculateElementsAttackCooldown(Time.deltaTime);
     }
 
     void PerformRangeAttack(){
-        if(Input.GetKey(KeyCode.Mouse0)){
+        if(Input.GetKey(KeyCode.Mouse0) && currentElement.attackReady){
             Debug.Log("RangeAttack");
 
-            currentElement.RangeAttack();
-
+            caster.RangeAttack(currentElement);
+            currentElement.StartCoolDown();
         }
     }
 
     void PerformMeleeAttack(){
-        if(Input.GetKey(KeyCode.Mouse1)){
+        if(Input.GetKey(KeyCode.Mouse1) && currentElement.attackReady){
             Debug.Log("MeleeAttack");
 
-            currentElement.MeleeAttack();
+            caster.MeleeAttack(currentElement);
+            currentElement.StartCoolDown();    
         }
     }
 
     void SwapElements(){
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            currentElementNumber += 1;
-            if(currentElementNumber == elements.Length){
-                currentElementNumber = 0;
-            }
+            currentElementNumber = (currentElementNumber + 1)%elements.Length;
 
             currentElement = elements[currentElementNumber];
         }

@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 7022181543790574580}
   - component: {fileID: 5071497330965663908}
   - component: {fileID: 3520446753968323821}
+  - component: {fileID: 38120900437635946}
   - component: {fileID: 2931279151367382121}
   - component: {fileID: 86545494379206730}
   - component: {fileID: 815910737983350122}
-  - component: {fileID: 38120900437635946}
   - component: {fileID: 1573712408291650027}
   - component: {fileID: 5820599972793887060}
   - component: {fileID: 4389698741922604984}
+  - component: {fileID: 905697825507964604}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -96,6 +97,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401181074662469395}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &38120900437635946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401181074662469395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3337b4a48f3ff48be83c22003f617b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mana: 100
+  maxMana: 100
+  elements:
+  - meleeAttackPrefab: {fileID: 0}
+    projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
+    effect: {fileID: -5486907240598668662, guid: 4ebd3d388327e3745b0be3f281f52c3e, type: 3}
+    caster: {fileID: 905697825507964604}
+    elementName: fire
+    meleedamage: 2
+    meleeRange: 3
+    attackCooldown: 1
+    currentCooldown: 0
+    manacost: 5
+    attackReady: 1
+    rangeDamage: 2
+    projectileSpeed: 3
+    bounces: 1
+    explodes: 0
+    affectedByGravity: 1
+    bounceNumber: 15
+    explosionVFX: {fileID: 0}
+    explosionRange: 5
+  - meleeAttackPrefab: {fileID: 0}
+    projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
+    effect: {fileID: -5486907240598668662, guid: 4ebd3d388327e3745b0be3f281f52c3e, type: 3}
+    caster: {fileID: 905697825507964604}
+    elementName: fire
+    meleedamage: 2
+    meleeRange: 3
+    attackCooldown: 0.5
+    currentCooldown: 0
+    manacost: 5
+    attackReady: 1
+    rangeDamage: 2
+    projectileSpeed: 20
+    bounces: 0
+    explodes: 0
+    affectedByGravity: 0
+    bounceNumber: 15
+    explosionVFX: {fileID: 0}
+    explosionRange: 5
 --- !u!114 &2931279151367382121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,29 +217,6 @@ MonoBehaviour:
   wallRunFOVTime: 0
   camTilt: 0
   camTiltTime: 0
---- !u!114 &38120900437635946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401181074662469395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3337b4a48f3ff48be83c22003f617b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mana: 100
-  maxMana: 100
-  elements:
-  - meleeAttackPrefab: {fileID: 0}
-    rangeAttackPrefab: {fileID: 0}
-    effect: {fileID: 0}
-    elementName: fire
-    meleedamage: 2
-    meleeRange: 3
-    rangeDamage: 2
-    manacost: 5
 --- !u!136 &1573712408291650027
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -250,6 +281,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   maxHp: 100
+--- !u!114 &905697825507964604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401181074662469395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaced40bcaeb3604aae9c7277bb0c461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castPoint: {fileID: 8196723069432715302}
+--- !u!1 &5452590297062719263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8196723069432715302}
+  m_Layer: 0
+  m_Name: CastPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8196723069432715302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5452590297062719263}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 1.7199998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2439670041538624030}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5933377858749487369
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +495,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8196723069432715302}
   m_Father: {fileID: 7022181543790574580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8730153374509398949
