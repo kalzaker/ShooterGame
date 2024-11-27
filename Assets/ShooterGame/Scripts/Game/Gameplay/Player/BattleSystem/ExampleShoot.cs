@@ -1,3 +1,4 @@
+using ShooterGame.Scripts.Game.Gameplay.Enemy;
 using UnityEngine;
 
 public class ExampleShoot : MonoBehaviour

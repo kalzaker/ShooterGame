@@ -2,22 +2,37 @@ using Fragsurf.Movement;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMove : MonoBehaviour
+namespace ShooterGame.Scripts.Game.Gameplay.Enemy
 {
-    private NavMeshAgent _agent;
-    private Rigidbody _rigidbody;
-    private Transform _target;
-
-    private void Start()
+    public class EnemyMove : MonoBehaviour
     {
-        _target = FindFirstObjectByType<SurfCharacter>().transform;
-        _agent = GetComponent<NavMeshAgent>();
-        
-        
-    }
+        private NavMeshAgent _agent;
+        private Rigidbody _rigidbody;
+        private Transform _target;
 
-    private void Update()
-    {
-        _agent.SetDestination(_target.position);
+        [SerializeField] private bool canMove = true;
+        [SerializeField] private float stopDistance = 10f;
+
+        private void Start()
+        {
+            _target = FindFirstObjectByType<SurfCharacter>().transform;
+            _agent = GetComponent<NavMeshAgent>();
+        }
+
+        private void Update()
+        {
+            if (canMove)
+                Move();
+            else
+                transform.LookAt(_target);
+        }
+
+        private void Move()
+        {
+            if(Vector3.Distance(transform.position, _target.position) > stopDistance)
+                _agent.SetDestination(_target.position);
+            else
+                _agent.ResetPath();
+        }
     }
 }

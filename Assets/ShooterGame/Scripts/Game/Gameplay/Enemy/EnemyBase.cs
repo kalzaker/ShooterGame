@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour
+namespace ShooterGame.Scripts.Game.Gameplay.Enemy
 {
-    private float currentHP = 100f;
-
-    public void TakeDamage(float damage)
+    public class EnemyBase : MonoBehaviour
     {
-        currentHP -= damage;
+        private float currentHP = 100f;
 
-        if (currentHP <= 0)
+        public void TakeDamage(float damage)
         {
-            Destroy(gameObject);
+            currentHP -= damage;
+
+            if (currentHP <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
