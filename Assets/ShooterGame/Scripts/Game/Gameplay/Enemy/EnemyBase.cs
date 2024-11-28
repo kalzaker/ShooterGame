@@ -1,27 +1,23 @@
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour, IExplodable
+namespace ShooterGame.Scripts.Game.Gameplay.Enemy
 {
-    private float currentHP = 100f;
-
-    UnityEngine.AI.NavMeshAgent _agent;
-
-    void Start(){
-        _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-    }
-
-    public void TakeDamage(float damage)
+    public class EnemyBase : MonoBehaviour
     {
-        currentHP -= damage;
+        private float currentHP = 100f;
 
-        if (currentHP <= 0)
+        public void TakeDamage(float damage)
         {
-            Destroy(gameObject);
-        }
-    }
+            currentHP -= damage;
 
-    public void ChangeSpeed(float value){
-        _agent.speed *= value;
-        Debug.Log(_agent.speed);
+            if (currentHP <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void ChangeSpeed(float value){
+            GetComponent<EnemyMove>().moveSpeed *= value;
+        }
     }
 }
