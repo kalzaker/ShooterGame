@@ -1,12 +1,13 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Element
+[CreateAssetMenu(menuName = "Element", fileName = "Element")]
+public class Element : ScriptableObject
 {
     [SerializeField] GameObject meleeAttackPrefab;
-    [SerializeField] public GameObject projectile;
-    [SerializeField] public Effect effect;
-    [SerializeField] Caster caster;
+    
+    public GameObject projectile;
+
+    public Effect[] effects;
 
     public string elementName;
 
@@ -22,15 +23,31 @@ public class Element
 
     [Header("Projectile settings")]
     public int rangeDamage; 
+
     public float projectileSpeed;
 
-    public bool bounces, explodes, affectedByGravity;
+    public bool bounces, affectedByGravity;
 
     public int bounceNumber;
 
-    public GameObject explosionVFX;
+    [Header("Explosion settings")]
+    public bool explodes;
 
-    public float explosionRange;
+    public GameObject explosionPrefab;
+
+    public bool instant;
+
+    public bool affectsPlayer;
+
+    public bool damagesPlayer;
+
+    public bool castsElementalDebuff;
+
+    public float explosionRadius;
+
+    public float effectStrength;
+
+    public float explosionDuration;
 
     public void CalculateCooldown(float value){
         if(currentCooldown >= attackCooldown){

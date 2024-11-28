@@ -1,45 +1,23 @@
 using UnityEngine;
-using System.Collections;
 
+[CreateAssetMenu(menuName = "Effects/Dot", fileName = "DamageOverTime")]
 public class DamageOverTime : Effect
 {
+    [Header("Special parameters")]
+    public float tickDamage;
     GameObject dotVFX;
 
-    Health healthComponent;
 
-    public float tickDamage;
-
-    public float tickRate;
-
-    public bool stackable;
-
-    protected override void Start()
-    {
-        base.Start();
-
-        healthComponent = GetComponent<Health>();
+    public override void Apply(GameObject target){
+        Debug.Log($"{tickDamage} по {target}");
+        target.GetComponent<Health>().TakeDamage(tickDamage);
     }
 
-    protected override void Update()
-    {
-        base.Update();
+    public override void Remove(GameObject target){
+
     }
 
-    IEnumerator DamageTick(){
-        healthComponent.currentHp -= tickDamage;
-        
-        yield return new WaitForSeconds(1/tickRate);
-
-        effectDuration -= 1/tickRate;
-
-        StartCoroutine("DamageTick");
-    }
-
-    void RefreshDotDuration(){
-        if(stackable) return;
-
-        if(TryGetComponent<DamageOverTime>(out DamageOverTime anotherDOT)){
-            anotherDOT.effectDuration += effectDuration;
-        }
+    public override void Extend(GameObject target, float extendDuration){
+        base.Extend(target, extendDuration);
     }
 }

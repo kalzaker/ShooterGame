@@ -1,23 +1,27 @@
 using UnityEngine;
 
-public abstract class Effect : MonoBehaviour
+public abstract class Effect : ScriptableObject
 {
-    public float effectDuration;
-    float effectTimer = 0;
+    [Header("Base parameters")]
+    public bool stackable;
 
-    protected virtual void Start()
-    {
-        effectTimer = effectDuration;
+    public bool ticking;
+
+    public float tickRate;
+
+    public float duration;
+
+
+    public float extensionDuration;
+
+
+    public abstract void Apply(GameObject target);
+
+    public virtual void Remove(GameObject target){
+        Debug.Log($"{this} zakon4ilsa na {target}");
     }
 
-    protected virtual void Update()
-    {
-        effectTimer -= Time.deltaTime;
-        RemoveEffect();
-    }
-
-    void RemoveEffect(){
-        if(effectTimer <= 0)
-        Destroy(this);
+    public virtual void Extend(GameObject target, float duration){
+        Debug.Log($"{this} prodolzen na {target} na {duration} secund");
     }
 }

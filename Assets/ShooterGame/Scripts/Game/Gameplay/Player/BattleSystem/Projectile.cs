@@ -14,13 +14,15 @@ public class Projectile : MonoBehaviour
 
     int bounceNumber;
 
-    GameObject explosionVFX;
-
-    float explosionRange;
+    GameObject explosionPrefab;
 
     float maxVertSpeed;
 
     float maxNegativeVertSpeed;
+
+    Effect[] effects;
+
+    Element _element;
 
     void Start()
     {
@@ -32,9 +34,6 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, 10f);
     }
 
-    void Update(){
-
-    }
 
     public void SetParameters(Element element){
         speed = element.projectileSpeed;
@@ -42,9 +41,10 @@ public class Projectile : MonoBehaviour
         explodes = element.explodes;
         bounces = element.bounces;
         bounceNumber = element.bounceNumber;
-        explosionVFX = element.explosionVFX;
+        explosionPrefab = element.explosionPrefab;
         affectedByGravity = element.affectedByGravity;
-        explosionRange = element.explosionRange;
+        effects = element.effects;
+        _element = element;
     }
 
     void UpdateParameters(){
@@ -79,17 +79,21 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.TryGetComponent<PlayerMovement>(out _))
+        if(other.gameObject.TryGetComponent<IPlayer>(out _))
         {
             return;
         }
 
         if(other.gameObject.TryGetComponent<Health>(out Health target)){
            target.TakeDamage(damage);
+           foreach(Effect effect in effects)
+           {
+                EffectManager.instance.ApplyEffect(target.gameObject, effect);
+
+           }
         }
 
         if(explodes){
-            //Instantiate(explosionVFX);
             Explode();
         }
 
@@ -102,11 +106,8 @@ public class Projectile : MonoBehaviour
     }
 
     void Explode(){
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
-        foreach(Collider coll in colliders){
-            if(coll.gameObject.TryGetComponent<Health>(out Health objHealthComponent)){
-                objHealthComponent.TakeDamage(damage);
-            }
-        }
+        Debug.Log(explosionPrefab);
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        explosion.GetComponent<BaseExplosion>().SetParameters(_element);
     }
 }

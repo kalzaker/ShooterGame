@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
+    public float moveSpeed;
+    
     private NavMeshAgent _agent;
     private Rigidbody _rigidbody;
     private Transform _target;

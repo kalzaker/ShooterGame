@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
         currentHp = maxHp;
     }
 
-    public void TakeDamage(int value){
+    public void TakeDamage(float value){
         currentHp -= value;
         if(currentHp <= 0)
         {
@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void RecoverHealth(int value){
+    public void RecoverHealth(float value){
         currentHp += value;
         if(currentHp >= maxHp)
         {
