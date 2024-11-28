@@ -10,13 +10,13 @@ public class Slow : Effect
 
     public override void Apply(GameObject target){
         Debug.Log($"{target} замедлен на {slow * 100}%");
-        if(target.TryGetComponent<EnemyBase>(out EnemyBase enemy)){
+        if(target.TryGetComponent<ShooterGame.Scripts.Game.Gameplay.Enemy.EnemyBase>(out ShooterGame.Scripts.Game.Gameplay.Enemy.EnemyBase enemy)){
             enemy.ChangeSpeed(1 - slow/100);
         }
     }
 
     public override void Remove(GameObject target){
-        if(target.TryGetComponent<EnemyBase>(out EnemyBase enemy)){
+        if(target.TryGetComponent<ShooterGame.Scripts.Game.Gameplay.Enemy.EnemyBase>(out ShooterGame.Scripts.Game.Gameplay.Enemy.EnemyBase enemy)){
             enemy.ChangeSpeed(1/(1-slow/100));
         }
     }
