@@ -79,6 +79,10 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+
+        if(other.gameObject.TryGetComponent<EnemyBullet>(out _)) return;
+
+        
         if(other.gameObject.TryGetComponent<IPlayer>(out _))
         {
             return;

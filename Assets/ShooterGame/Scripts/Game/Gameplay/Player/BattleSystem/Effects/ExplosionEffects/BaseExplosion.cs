@@ -27,7 +27,8 @@ public abstract class BaseExplosion : MonoBehaviour
 
     List<IExplodable> objectsInRange = new List<IExplodable>();
 
-    void Start(){
+    void Start()
+    {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach(Collider coll in colliders){
@@ -42,7 +43,8 @@ public abstract class BaseExplosion : MonoBehaviour
         }
     }
 
-    public void SetParameters(Element element){
+    public void SetParameters(Element element)
+    {
         instant = element.instant;
         explosionDuration = element.explosionDuration;
         explosionRadius = element.explosionRadius;
@@ -54,7 +56,8 @@ public abstract class BaseExplosion : MonoBehaviour
         castsElementalDebuff = element.castsElementalDebuff;
     }
 
-    void Update(){
+    void Update()
+    {
         foreach(IExplodable obj in objectsInRange){
             ExplosionEffect(obj);
         }
@@ -71,7 +74,8 @@ public abstract class BaseExplosion : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other){
+    void OnTriggerEnter(Collider other)
+    {
         if(other.TryGetComponent<IExplodable>(out IExplodable obj))
         {
             objectsInRange.Add(obj);
@@ -86,10 +90,16 @@ public abstract class BaseExplosion : MonoBehaviour
         }
     }
 
-    protected virtual void ExplosionEffect(IExplodable obj){
-        if(castsElementalDebuff){
+    protected virtual void ExplosionEffect(IExplodable obj)
+    {
+        if(castsElementalDebuff)
+        {
             foreach(Effect effect in _element.effects)
-            EffectManager.instance.ApplyEffect(obj.gameObject, effect);
+            {
+                
+                if(obj == null) return;
+                EffectManager.instance.ApplyEffect(obj.gameObject, effect);
+            }
         }
 
         Debug.Log("Explosion effect applied");

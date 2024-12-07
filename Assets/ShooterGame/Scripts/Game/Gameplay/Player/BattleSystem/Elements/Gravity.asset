@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee647f4e767bc254d95869ef613eb385, type: 3}
+  m_Name: Gravity
+  m_EditorClassIdentifier: 
+  meleeAttackPrefab: {fileID: 0}
+  projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
+  effects: []
+  elementName: Gravity
+  meleedamage: 5
+  meleeRange: 4
+  attackCooldown: 5
+  currentCooldown: 5.0042744
+  manacost: 15
+  attackReady: 1
+  rangeDamage: 15
+  projectileSpeed: 7
+  bounces: 0
+  affectedByGravity: 1
+  bounceNumber: 0
+  explodes: 1
+  explosionPrefab: {fileID: 8990875458167125222, guid: 47824c8a8204a2342a2e99d76883666b, type: 3}
+  instant: 0
+  affectsPlayer: 0
+  damagesPlayer: 0
+  castsElementalDebuff: 0
+  explosionRadius: 10
+  effectStrength: 1.5
+  explosionDuration: 5

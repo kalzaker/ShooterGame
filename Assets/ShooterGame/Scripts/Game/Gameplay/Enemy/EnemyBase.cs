@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShooterGame.Scripts.Game.Gameplay.Enemy
 {
-    public class EnemyBase : MonoBehaviour
+    public class EnemyBase : MonoBehaviour, IExplodable
     {
         private float currentHP = 100f;
 
