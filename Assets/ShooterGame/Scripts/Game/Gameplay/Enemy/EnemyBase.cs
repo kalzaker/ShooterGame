@@ -4,18 +4,6 @@ namespace ShooterGame.Scripts.Game.Gameplay.Enemy
 {
     public class EnemyBase : MonoBehaviour, IExplodable
     {
-        private float currentHP = 100f;
-
-        public void TakeDamage(float damage)
-        {
-            currentHP -= damage;
-
-            if (currentHP <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-
         public void ChangeSpeed(float value){
             GetComponent<EnemyMove>().moveSpeed *= value;
         }

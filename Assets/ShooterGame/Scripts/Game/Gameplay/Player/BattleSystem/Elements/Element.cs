@@ -4,8 +4,6 @@ using UnityEngine;
 public class Element : ScriptableObject
 {
     [SerializeField] GameObject meleeAttackPrefab;
-    
-    public GameObject projectile;
 
     public Effect[] effects;
 
@@ -22,6 +20,10 @@ public class Element : ScriptableObject
     public bool attackReady;
 
     [Header("Projectile settings")]
+    public GameObject projectile;
+
+    public Material projectileMaterial;
+
     public int rangeDamage; 
 
     public float projectileSpeed;
@@ -48,6 +50,12 @@ public class Element : ScriptableObject
     public float effectStrength;
 
     public float explosionDuration;
+
+    [Header("Explosion VFX")]
+    
+    public GameObject explosionVFX;
+    
+    public float VfxLifeTime;
 
     public void CalculateCooldown(float value){
         if(currentCooldown >= attackCooldown){

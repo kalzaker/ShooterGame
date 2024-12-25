@@ -9,33 +9,37 @@ public class Level : MonoBehaviour
     
     [SerializeField] Wave[] waves;
 
-    Wave currentWave;
+    public Wave currentWave;
 
-    [System.Serializable]
-    public class Wave
-    {
-        public Wave(EnemyBase[] enemies, int enemiesNumber){
+    int currentWaveNumber;
 
-        }
-
-        public int enemiesNumber;
-        
-        [HideInInspector] public int enemiesLeft;
-
-        public EnemyBase[] enemies;
-
-    }
-
-    void StartLevel()
-    {
+    public void StartLevel(){
         currentWave = waves[0];
+        currentWaveNumber = 1;
+        StartWave();
     }
 
-    public void StartWave(Wave wave)
+    public void ChangeWave(){
+        if(currentWaveNumber == waves.Length + 1){
+            EndLevel();
+            return;
+        }
+        currentWave = waves[currentWaveNumber];
+        currentWaveNumber++;
+        StartWave();
+    }
+
+    public void StartWave()
     {
+        currentWave.levelInstance = this;
+
         foreach(EnemyBase enemyToSummon in currentWave.enemies){
             Instantiate(enemyToSummon, enemiesSpawnPoints[Random.Range(0, enemiesSpawnPoints.Length)].position, Quaternion.identity);
             currentWave.enemiesLeft++;
         }
+    }
+
+    void EndLevel(){
+
     }
 }

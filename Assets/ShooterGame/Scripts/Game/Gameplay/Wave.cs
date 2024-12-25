@@ -4,13 +4,13 @@ using ShooterGame.Scripts.Game.Gameplay.Enemy;
 [System.Serializable]
 public class Wave
 {
-    public int enemiesNumber;
-
     public int enemiesLeft;
 
-    EnemyBase[] enemies;
+    public EnemyBase[] enemies;
 
-    void DecreaseEnemiesLeft(){
+    public Level levelInstance;
+
+    public void DecreaseEnemiesLeft(){
         enemiesLeft--;
         if(enemiesLeft == 0)
         {
@@ -19,6 +19,6 @@ public class Wave
     }
 
     void WaveCleared(){
-
+        levelInstance.StartWave();
     }
 }

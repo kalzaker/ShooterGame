@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerBattleController : MonoBehaviour
+public class PlayerBattleController : MonoBehaviour, IExplodable
 {
     public static PlayerBattleController Instance;
 

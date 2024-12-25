@@ -24,6 +24,8 @@ public class Projectile : MonoBehaviour
 
     Element _element;
 
+    Material material;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -45,10 +47,13 @@ public class Projectile : MonoBehaviour
         affectedByGravity = element.affectedByGravity;
         effects = element.effects;
         _element = element;
+        material = element.projectileMaterial;
     }
 
     void UpdateParameters(){
         rb.useGravity = affectedByGravity;
+
+        GetComponent<MeshRenderer>().material = material;
 
         CreatePhysMaterial();
     }

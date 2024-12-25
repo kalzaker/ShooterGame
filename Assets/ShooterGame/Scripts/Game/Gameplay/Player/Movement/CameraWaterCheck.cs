@@ -24,7 +24,7 @@ public class CameraWaterCheck : MonoBehaviour {
         
         foreach (Collider trigger in triggers) {
 
-            if (trigger.GetComponentInParent<Water> ())
+            //if (trigger.GetComponentInParent<Water> ())
                 return true;
 
         }

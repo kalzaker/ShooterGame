@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee647f4e767bc254d95869ef613eb385, type: 3}
-  m_Name: Gravity
+  m_Name: Air
   m_EditorClassIdentifier: 
   meleeAttackPrefab: {fileID: 0}
   effects: []
-  elementName: Gravity
-  meleedamage: 5
-  meleeRange: 4
-  attackCooldown: 5
-  currentCooldown: 4.3404975
-  manacost: 15
-  attackReady: 0
+  elementName: Air
+  meleedamage: 3
+  meleeRange: 3
+  attackCooldown: 3
+  currentCooldown: 3.0154753
+  manacost: 0
+  attackReady: 1
   projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
-  projectileMaterial: {fileID: 2100000, guid: a2a8acbd74d41384c9fd9dd02df46a41, type: 2}
-  rangeDamage: 15
-  projectileSpeed: 7
+  projectileMaterial: {fileID: 0}
+  rangeDamage: 1
+  projectileSpeed: 5
   bounces: 0
   affectedByGravity: 1
   bounceNumber: 0
   explodes: 1
-  explosionPrefab: {fileID: 8990875458167125222, guid: 47824c8a8204a2342a2e99d76883666b, type: 3}
-  instant: 0
-  affectsPlayer: 0
+  explosionPrefab: {fileID: 624950238665109464, guid: c41b351778017a847a819ee9861d0e40, type: 3}
+  instant: 1
+  affectsPlayer: 1
   damagesPlayer: 0
   castsElementalDebuff: 0
-  explosionRadius: 8
-  effectStrength: 4
-  explosionDuration: 5
-  explosionVFX: {fileID: 7477082728935278806, guid: a442ca3ace174f34b91e67163b7abc97, type: 3}
-  VfxLifeTime: 5
+  explosionRadius: 5
+  effectStrength: 5
+  explosionDuration: 0
+  explosionVFX: {fileID: 0}
+  VfxLifeTime: 0

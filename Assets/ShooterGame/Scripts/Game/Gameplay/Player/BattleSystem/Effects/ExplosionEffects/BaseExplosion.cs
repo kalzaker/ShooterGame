@@ -20,15 +20,19 @@ public abstract class BaseExplosion : MonoBehaviour
 
     protected float effectStrength;
 
+    protected float VfxLifeTime;
+
     Element _element;
 
     Effect[] effects;
 
 
-    List<IExplodable> objectsInRange = new List<IExplodable>();
+    [SerializeField]protected List<IExplodable> objectsInRange = new List<IExplodable>();
 
     void Start()
     {
+        CreateCollider();
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach(Collider coll in colliders){
@@ -39,8 +43,21 @@ public abstract class BaseExplosion : MonoBehaviour
 
         if(explosionVFX != null)
         {
-            Instantiate(explosionVFX, transform.position, Quaternion.identity);
+            GameObject explVFX = Instantiate(explosionVFX, transform.position, Quaternion.identity);
+
+            explVFX.AddComponent<VFXDestroyer>();
+
+            explVFX.GetComponent<VFXDestroyer>().DestroyVFX(VfxLifeTime);
         }
+    }
+
+    void CreateCollider(){
+        gameObject.AddComponent<SphereCollider>();
+
+        SphereCollider coll = GetComponent<SphereCollider>();
+
+        coll.isTrigger = true;
+        coll.radius = explosionRadius;
     }
 
     public void SetParameters(Element element)
@@ -54,11 +71,17 @@ public abstract class BaseExplosion : MonoBehaviour
         effectStrength = element.effectStrength;
         effects = element.effects;
         castsElementalDebuff = element.castsElementalDebuff;
+        explosionVFX = element.explosionVFX;
+        VfxLifeTime = element.VfxLifeTime;
     }
 
     void Update()
     {
         foreach(IExplodable obj in objectsInRange){
+            if(obj == null)
+            {
+                continue;
+            }
             ExplosionEffect(obj);
         }
 
@@ -79,6 +102,8 @@ public abstract class BaseExplosion : MonoBehaviour
         if(other.TryGetComponent<IExplodable>(out IExplodable obj))
         {
             objectsInRange.Add(obj);
+            
+            Debug.Log("Added");
         }
     }
 
@@ -87,11 +112,13 @@ public abstract class BaseExplosion : MonoBehaviour
         if(other.TryGetComponent<IExplodable>(out IExplodable obj))
         {
             objectsInRange.Remove(obj);
+            Debug.Log("Removed");
         }
     }
 
     protected virtual void ExplosionEffect(IExplodable obj)
     {
+        
         if(castsElementalDebuff)
         {
             foreach(Effect effect in _element.effects)
@@ -102,6 +129,5 @@ public abstract class BaseExplosion : MonoBehaviour
             }
         }
 
-        Debug.Log("Explosion effect applied");
     }
 }

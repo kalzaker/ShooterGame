@@ -142,6 +142,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74c17ea7e78135640a3c9209b3050d4e, type: 2}
   - {fileID: 11400000, guid: a3d4ac15a109b2644a690390897cec17, type: 2}
   - {fileID: 11400000, guid: d2ad49c06f88f074f98d1367f0b1a44e, type: 2}
+  - {fileID: 11400000, guid: 20a7c236079f9de489d09a3c5cbcb744, type: 2}
 --- !u!114 &32926145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +332,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367465384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec350240fc932444a19eea2f3d32d4d, type: 3}
   m_Name: 
@@ -473,7 +474,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367465384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 489b757a413007a4398415d02268b907, type: 3}
   m_Name: 
@@ -803,7 +804,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837786517}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec350240fc932444a19eea2f3d32d4d, type: 3}
   m_Name: 
@@ -945,7 +946,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837786517}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 489b757a413007a4398415d02268b907, type: 3}
   m_Name: 
@@ -1293,9 +1294,14 @@ MonoBehaviour:
   enemies: []
   enemiesSpawnPoints: []
   waves:
-  - enemiesNumber: 5
+  - enemiesLeft: 0
+    enemies:
+    - {fileID: 5329702357592299953, guid: 13b1f21c5c1e7c44a9329d7fc67ff5ca, type: 3}
+    levelInstance: {fileID: 0}
+  currentWave:
     enemiesLeft: 0
     enemies: []
+    levelInstance: {fileID: 0}
 --- !u!4 &1272532082
 Transform:
   m_ObjectHideFlags: 0
@@ -2463,6 +2469,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4339122526611429289, guid: 18c8e6bd501981b4d9df238c8d61dde6, type: 3}
+      propertyPath: weight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339122526611429289, guid: 18c8e6bd501981b4d9df238c8d61dde6, type: 3}
+      propertyPath: solidCollider
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4339122526611429290, guid: 18c8e6bd501981b4d9df238c8d61dde6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.2272801
