@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5467285083954485886}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5467285085316221433}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5467285083954485883
 Camera:
@@ -46,9 +47,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -93,6 +102,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5467285084242854812}
   - component: {fileID: 5467285084242854815}
+  - component: {fileID: 963988372484925628}
+  - component: {fileID: 5511513545492561213}
   m_Layer: 8
   m_Name: Example player prefab
   m_TagString: Untagged
@@ -107,13 +118,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5467285084242854813}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5467285085316221433}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5467285084242854815
 MonoBehaviour:
@@ -128,7 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderSize: {x: 1, y: 2, z: 1}
-  collisionType: 0
   weight: 75
   rigidbodyPushForce: 2
   solidCollider: 0
@@ -138,6 +149,8 @@ MonoBehaviour:
   crouchingSpeed: 10
   crouchingEnabled: 1
   slidingEnabled: 0
+  laddersEnabled: 1
+  supportAngledLadders: 1
   useStepOffset: 0
   stepOffset: 0.35
   movementConfig:
@@ -173,6 +186,38 @@ MonoBehaviour:
     underwaterFriction: 2
     underwaterGravity: 6
     underwaterVelocityDampening: 2
+--- !u!114 &963988372484925628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467285084242854813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3337b4a48f3ff48be83c22003f617b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mana: 0
+  maxMana: 0
+  elements:
+  - {fileID: 11400000, guid: d2ad49c06f88f074f98d1367f0b1a44e, type: 2}
+  - {fileID: 11400000, guid: a3d4ac15a109b2644a690390897cec17, type: 2}
+  - {fileID: 11400000, guid: 20a7c236079f9de489d09a3c5cbcb744, type: 2}
+--- !u!114 &5511513545492561213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467285084242854813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c841ee47e214954a8b860b24e5dfe59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 15
+  maxHp: 15
 --- !u!1 &5467285085316221438
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,13 +242,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5467285085316221438}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5467285083954485881}
   m_Father: {fileID: 5467285084242854812}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5467285085316221432
 MonoBehaviour:
@@ -223,7 +269,7 @@ MonoBehaviour:
   verticalSensitivity: 1
   minYRotation: -90
   maxYRotation: 90
-  bodyRotation: 0
-  cameraRotation: {x: 0, y: 0, z: 0}
-  leanInput: 0
-  sway: 0
+  punchDamping: 9
+  punchSpringConstant: 65
+  punchAngle: {x: 0, y: 0}
+  punchAngleVel: {x: 0, y: 0}

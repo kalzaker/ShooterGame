@@ -6,12 +6,20 @@ namespace ShooterGame.Scripts.Game.Gameplay
     {
         [SerializeField] private GameObject[] _levelsList;
 
+        GameObject nextLevel;
+
         public void NextLevel(Vector3 pos, GameObject currentLevel)
         {
-            GameObject nextLevel = _levelsList[Random.Range(0, _levelsList.Length)];
+            nextLevel = _levelsList[Random.Range(0, _levelsList.Length)];
             Instantiate(nextLevel, pos, Quaternion.identity);
             
             Destroy(currentLevel);
+        }
+
+        public void TeleportPlayer(GameObject player){
+            Debug.Log("TELEPORTED");
+            Debug.Log(nextLevel.GetComponent<Level>().playerSpawnPoint.position);
+            player.transform.position = nextLevel.GetComponent<Level>().playerSpawnPoint.position;
         }
     }
 }

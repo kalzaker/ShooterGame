@@ -20,6 +20,7 @@ public class Portal : MonoBehaviour
             Vector3 pos = new Vector3(transform.position.x + 200f, transform.position.y, transform.position.z);
             
             _levelChanger.NextLevel(pos, currentLevel);
+            _levelChanger.TeleportPlayer(other.gameObject);
         }
     }
 }

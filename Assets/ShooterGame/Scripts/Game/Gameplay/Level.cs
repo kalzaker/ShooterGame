@@ -5,25 +5,32 @@ public class Level : MonoBehaviour
 {
     [SerializeField] EnemyBase[] enemies;
 
+    [SerializeField] Portal portal;
+
     [SerializeField] Transform[] enemiesSpawnPoints;
-    
+
     [SerializeField] Wave[] waves;
+
+    public Transform playerSpawnPoint;
 
     public Wave currentWave;
 
     int currentWaveNumber;
 
+    void Start(){
+
+        Debug.Log(waves);
+        StartLevel();
+    }
+
     public void StartLevel(){
         currentWave = waves[0];
         currentWaveNumber = 1;
+        Debug.Log("Level started");
         StartWave();
     }
 
     public void ChangeWave(){
-        if(currentWaveNumber == waves.Length + 1){
-            EndLevel();
-            return;
-        }
         currentWave = waves[currentWaveNumber];
         currentWaveNumber++;
         StartWave();
@@ -31,15 +38,18 @@ public class Level : MonoBehaviour
 
     public void StartWave()
     {
+        Debug.Log("Wave "+ currentWaveNumber);
         currentWave.levelInstance = this;
+        
+        EventManager.enemyDied.AddListener(currentWave.DecreaseEnemiesLeft);
 
-        foreach(EnemyBase enemyToSummon in currentWave.enemies){
-            Instantiate(enemyToSummon, enemiesSpawnPoints[Random.Range(0, enemiesSpawnPoints.Length)].position, Quaternion.identity);
-            currentWave.enemiesLeft++;
+        foreach(Transform spawnpoint in enemiesSpawnPoints){
+            if(Random.Range(currentWave, 100) < 50)
+            for(int i = 0; i < Mathf.sqrt(wavesNumber)){
+                Instantiate(enemies[Random.Range(0,enemies.Length)], spawnpoint.position, Quaternion.identity);
+                currentWave.enemiesLeft++;
+            }
         }
     }
 
-    void EndLevel(){
-
-    }
 }

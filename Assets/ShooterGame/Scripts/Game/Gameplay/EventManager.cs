@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using ShooterGame.Scripts.Game.Gameplay.Enemy;
 
-public class EventManager
+public static class EventManager
 {
-    public UnityEvent<EnemyBase> enemyDied = new UnityEvent<EnemyBase>();
+    public static UnityEvent enemyDied = new UnityEvent();
 
-    public UnityEvent levelEnded = new UnityEvent();
+    public static UnityEvent levelEnded = new UnityEvent();
 }

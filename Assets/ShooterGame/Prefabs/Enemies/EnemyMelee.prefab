@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: -7796639086714350812}
   - component: {fileID: 6877430475472973932}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyMelee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,6 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  canMove: 1
+  stopDistance: 10
 --- !u!114 &-7796639086714350812
 MonoBehaviour:
   m_ObjectHideFlags: 0
