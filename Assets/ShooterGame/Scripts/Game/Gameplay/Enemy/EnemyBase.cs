@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace ShooterGame.Scripts.Game.Gameplay.Enemy
 {

@@ -13,11 +13,7 @@ public class Wave
         Debug.Log("Enemies left: " + enemiesLeft);
         if(enemiesLeft == 0)
         {
-            WaveCleared();
+            levelInstance.ChangeWave();
         }
-    }
-
-    void WaveCleared(){
-        levelInstance.ChangeWave();
     }
 }
