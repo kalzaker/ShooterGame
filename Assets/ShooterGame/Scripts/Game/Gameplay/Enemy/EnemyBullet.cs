@@ -34,7 +34,7 @@ public class EnemyBullet : MonoBehaviour
             target.TakeDamage(damage);
         }
 
-
+        EventManager.soundPlayed.Invoke(Clip.OrbCollision, transform.position);
         Destroy(gameObject);
         
     }

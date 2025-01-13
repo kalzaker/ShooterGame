@@ -1,5 +1,7 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
+using ShooterGame.Scripts.Game.Gameplay.Enemy;
 
 [System.Serializable]
 public abstract class BaseExplosion : MonoBehaviour
@@ -26,20 +28,27 @@ public abstract class BaseExplosion : MonoBehaviour
 
     Effect[] effects;
 
+    [SerializeField]Clip clipName;
+
 
     [SerializeField]protected List<IExplodable> objectsInRange = new List<IExplodable>();
 
     void Start()
     {
+        EventManager.enemyDied.AddListener(RemoveEnemyFromList);
         CreateCollider();
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach(Collider coll in colliders){
             if(coll.gameObject.TryGetComponent(out IExplodable explodable)){
+
+                if(explodable.gameObject == null) continue;
                 objectsInRange.Add(explodable);
             }
         }
+
+        EventManager.soundPlayed.Invoke(clipName, transform.position);
 
         if(explosionVFX != null)
         {
@@ -49,6 +58,10 @@ public abstract class BaseExplosion : MonoBehaviour
 
             explVFX.GetComponent<VFXDestroyer>().DestroyVFX(VfxLifeTime);
         }
+    }
+
+    void RemoveEnemyFromList(EnemyBase enemy){
+        objectsInRange.Remove(enemy);
     }
 
     void CreateCollider(){
@@ -78,15 +91,16 @@ public abstract class BaseExplosion : MonoBehaviour
     void Update()
     {
         foreach(IExplodable obj in objectsInRange){
-            if(obj == null)
-            {
+            try{
+                ExplosionEffect(obj);
+                }
+            catch(Exception e){
                 continue;
             }
-            ExplosionEffect(obj);
         }
 
         if(instant){
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         explosionDuration -= Time.deltaTime;
@@ -101,6 +115,8 @@ public abstract class BaseExplosion : MonoBehaviour
     {
         if(other.TryGetComponent<IExplodable>(out IExplodable obj))
         {
+            if(obj == null) return;
+
             objectsInRange.Add(obj);
             
             Debug.Log("Added");
@@ -124,10 +140,13 @@ public abstract class BaseExplosion : MonoBehaviour
             foreach(Effect effect in _element.effects)
             {
                 
-                if(obj == null) return;
+                if(obj == null)
+                {
+                    objectsInRange.Remove(obj);
+                    return;
+                }
                 EffectManager.instance.ApplyEffect(obj.gameObject, effect);
             }
         }
-
     }
 }

@@ -47,8 +47,8 @@ public class GameUI : MonoBehaviour
         {
             firstSpellIcon.SetActive(false);
             secondSpellIcon.SetActive(false);
-            thirdSpellIcon.SetActive(true);
-            fourthSpellIcon.SetActive(false);
+            thirdSpellIcon.SetActive(false);
+            fourthSpellIcon.SetActive(true);
         }
         
         currentWaveText.text = "Current wave: " + _levelManager.currentWaveNumber;

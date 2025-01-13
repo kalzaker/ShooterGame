@@ -111,12 +111,15 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+        EventManager.soundPlayed.Invoke(Clip.OrbCollision, transform.position);
+
         Destroy(gameObject);
     }
 
     void Explode(){
         Debug.Log(explosionPrefab);
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
         explosion.GetComponent<BaseExplosion>().SetParameters(_element);
     }
 }

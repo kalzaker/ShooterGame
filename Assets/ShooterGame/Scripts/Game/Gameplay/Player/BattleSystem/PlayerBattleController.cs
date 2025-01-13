@@ -49,7 +49,7 @@ public class PlayerBattleController : MonoBehaviour, IExplodable
             caster.RangeAttack(currentElement);
             currentElement.StartCoolDown();
 
-            _audioSource.PlayOneShot(_audioSource.clip);
+            EventManager.soundPlayed.Invoke(Clip.Attack, transform.position);
         }
     }
 

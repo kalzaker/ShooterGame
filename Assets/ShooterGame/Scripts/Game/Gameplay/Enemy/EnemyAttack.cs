@@ -11,6 +11,7 @@ namespace ShooterGame.Scripts.Game.Gameplay.Enemy
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform firePoint;
 
+
         private Transform _target;
         private float _fireCount = 0;
 
@@ -41,7 +42,9 @@ namespace ShooterGame.Scripts.Game.Gameplay.Enemy
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 Vector3 shootDirection = (_target.position - firePoint.transform.position).normalized;
                 bullet.GetComponent<Rigidbody>().linearVelocity =
-                    Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * shootDirection * 40;
+                Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * shootDirection * 40;
+
+                EventManager.soundPlayed.Invoke(Clip.Attack, transform.position);
             }
         }
     }

@@ -11,9 +11,13 @@ public class Level : MonoBehaviour
 
     public int currentWaveNumber;
 
+    [SerializeField] GameObject player;
+
     void Start()
     {
         StartLevel();
+
+        
     }
 
     public void StartLevel(){
@@ -31,6 +35,9 @@ public class Level : MonoBehaviour
 
     public void StartWave()
     {
+        
+        EventManager.soundPlayed.Invoke(Clip.WaveCleared, player.gameObject.transform.position);
+
         Debug.Log("Wave "+ currentWaveNumber);
         currentWave.levelInstance = this;
         

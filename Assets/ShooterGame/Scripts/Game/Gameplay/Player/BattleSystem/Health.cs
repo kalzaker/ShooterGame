@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using ShooterGame.Scripts.Game.Gameplay.Enemy;
 
 public class Health : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] float invulTime;
 
-    bool canTakeDamage;
+    bool canTakeDamage = true;
 
     void Start(){
         canTakeDamage = true;
@@ -20,16 +21,31 @@ public class Health : MonoBehaviour
         currentHp -= value;
         if(currentHp <= 0)
         {
-            Destroy(gameObject);
-            Time.timeScale = 0;
-            
-            var GameUI = FindFirstObjectByType<GameUI>();
-            GameUI.GameOver();
+            Die();
         }
 
         if(gameObject.CompareTag("Player")){
             StartCoroutine("InvulTime");
-        }   
+        }
+
+        EventManager.soundPlayed.Invoke(Clip.Hurt, transform.position);
+    }
+    
+    void Die(){
+
+        if(gameObject.CompareTag("Player")){
+            Time.timeScale = 0;    
+            var GameUI = FindFirstObjectByType<GameUI>();
+            GameUI.GameOver();
+            
+            EventManager.soundPlayed.Invoke(Clip.Die, transform.position);
+            return;
+        }
+
+        EventManager.soundPlayed.Invoke(Clip.EnemyDie, transform.position);
+        EventManager.enemyDied.Invoke(GetComponent<EnemyBase>());
+
+        Destroy(gameObject);
     }
 
     public void RecoverHealth(float value){
