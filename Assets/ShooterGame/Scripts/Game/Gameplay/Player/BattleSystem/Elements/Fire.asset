@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   meleeAttackPrefab: {fileID: 0}
-  projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
   effects:
   - {fileID: 11400000, guid: 40d32c919eb2c384082c3544b66f0ed2, type: 2}
   elementName: fire
@@ -23,7 +22,9 @@ MonoBehaviour:
   currentCooldown: 1.0014588
   manacost: 5
   attackReady: 1
-  rangeDamage: 3
+  projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
+  projectileMaterial: {fileID: 0}
+  rangeDamage: 100
   projectileSpeed: 15
   bounces: 0
   affectedByGravity: 0
@@ -37,3 +38,5 @@ MonoBehaviour:
   explosionRadius: 5
   effectStrength: 1
   explosionDuration: 1
+  explosionVFX: {fileID: 0}
+  VfxLifeTime: 0

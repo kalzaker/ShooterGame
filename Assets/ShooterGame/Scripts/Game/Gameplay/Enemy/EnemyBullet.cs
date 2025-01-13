@@ -24,18 +24,18 @@ public class EnemyBullet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player") && damagePlayer)
+        if(other.gameObject.TryGetComponent<Health>(out Health target))
         {
-            //Damage Player
+            if(other.gameObject.CompareTag("Enemy")){
+                return;
+            }
+            target.TakeDamage(damage);
         }
 
-        if (other.gameObject.CompareTag("Enemy") && damageEnemy)
-        {
-            other.gameObject.GetComponent<Health>().TakeDamage(damage);
-        }
-        
+
         Destroy(gameObject);
+        
     }
 }
