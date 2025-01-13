@@ -21,6 +21,10 @@ public class Health : MonoBehaviour
         if(currentHp <= 0)
         {
             Destroy(gameObject);
+            Time.timeScale = 0;
+            
+            var GameUI = FindFirstObjectByType<GameUI>();
+            GameUI.GameOver();
         }
 
         if(gameObject.CompareTag("Player")){

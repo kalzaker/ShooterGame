@@ -20,9 +20,9 @@ public class PlayerBattleController : MonoBehaviour, IExplodable
 
     [SerializeField] Element[] elements;
 
-    Element currentElement;
+    public Element currentElement;
 
-    int currentElementNumber;
+    public int currentElementNumber;
 
     void Start(){
         caster = GetComponent<Caster>();

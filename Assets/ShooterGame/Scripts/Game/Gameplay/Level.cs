@@ -9,7 +9,7 @@ public class Level : MonoBehaviour
 
     public Wave currentWave;
 
-    int currentWaveNumber;
+    public int currentWaveNumber;
 
     void Start()
     {
