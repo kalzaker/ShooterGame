@@ -19,12 +19,12 @@ MonoBehaviour:
   meleedamage: 1
   meleeRange: 2
   attackCooldown: 1
-  currentCooldown: 1.0014588
+  currentCooldown: 0.6009271
   manacost: 5
-  attackReady: 1
+  attackReady: 0
   projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
   projectileMaterial: {fileID: 0}
-  rangeDamage: 100
+  rangeDamage: 1
   projectileSpeed: 15
   bounces: 0
   affectedByGravity: 0
