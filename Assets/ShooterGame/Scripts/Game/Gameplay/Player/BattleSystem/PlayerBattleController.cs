@@ -4,6 +4,8 @@ using UnityEngine.Events;
 public class PlayerBattleController : MonoBehaviour, IExplodable
 {
     public static PlayerBattleController Instance;
+    
+    private AudioSource _audioSource;
 
     void Awake(){
         if(Instance == null){
@@ -29,6 +31,8 @@ public class PlayerBattleController : MonoBehaviour, IExplodable
         mana = maxMana;
         currentElement = elements[0];
         currentElementNumber = 0;
+        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update(){
@@ -44,6 +48,8 @@ public class PlayerBattleController : MonoBehaviour, IExplodable
 
             caster.RangeAttack(currentElement);
             currentElement.StartCoolDown();
+
+            _audioSource.PlayOneShot(_audioSource.clip);
         }
     }
 
