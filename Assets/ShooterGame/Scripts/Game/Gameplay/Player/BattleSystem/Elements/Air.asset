@@ -18,10 +18,10 @@ MonoBehaviour:
   meleedamage: 3
   meleeRange: 3
   attackCooldown: 3
-  currentCooldown: 3.0154753
+  currentCooldown: 3.0164232
   manacost: 0
   attackReady: 1
-  projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
+  projectile: {fileID: 4038887999696518136, guid: e2bb1fdee53774646875eac4259cf733, type: 3}
   projectileMaterial: {fileID: 0}
   rangeDamage: 1
   projectileSpeed: 5

@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Ice
   m_EditorClassIdentifier: 
   meleeAttackPrefab: {fileID: 0}
-  projectile: {fileID: 562347057215896562, guid: f2b478335ef26c74ea55ba8ea4268694, type: 3}
   effects:
   - {fileID: 11400000, guid: 2f013f3934c6a1549aa2d64a6d2487ff, type: 2}
   elementName: ice
   meleedamage: 15
   meleeRange: 2
   attackCooldown: 2
-  currentCooldown: 2.0001512
+  currentCooldown: 2.0334747
   manacost: 0
   attackReady: 1
+  projectile: {fileID: 4038887999696518136, guid: 409af2645afd3b64eab1892d52e68fe4, type: 3}
+  projectileMaterial: {fileID: 0}
   rangeDamage: 15
   projectileSpeed: 20
   bounces: 0
@@ -37,3 +38,5 @@ MonoBehaviour:
   explosionRadius: 0
   effectStrength: 0
   explosionDuration: 0
+  explosionVFX: {fileID: 0}
+  VfxLifeTime: 0

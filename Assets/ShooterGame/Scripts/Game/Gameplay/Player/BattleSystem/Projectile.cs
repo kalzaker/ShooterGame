@@ -53,8 +53,6 @@ public class Projectile : MonoBehaviour
     void UpdateParameters(){
         rb.useGravity = affectedByGravity;
 
-        GetComponent<MeshRenderer>().material = material;
-
         CreatePhysMaterial();
     }
 
