@@ -18,13 +18,13 @@ MonoBehaviour:
   meleedamage: 3
   meleeRange: 3
   attackCooldown: 3
-  currentCooldown: 3.0164232
+  currentCooldown: 3.0154371
   manacost: 0
   attackReady: 1
   projectile: {fileID: 4038887999696518136, guid: e2bb1fdee53774646875eac4259cf733, type: 3}
   projectileMaterial: {fileID: 0}
   rangeDamage: 1
-  projectileSpeed: 5
+  projectileSpeed: 15
   bounces: 0
   affectedByGravity: 1
   bounceNumber: 0
@@ -34,8 +34,8 @@ MonoBehaviour:
   affectsPlayer: 1
   damagesPlayer: 0
   castsElementalDebuff: 0
-  explosionRadius: 5
-  effectStrength: 5
+  explosionRadius: 10
+  effectStrength: 10
   explosionDuration: 0
   explosionVFX: {fileID: 0}
   VfxLifeTime: 0

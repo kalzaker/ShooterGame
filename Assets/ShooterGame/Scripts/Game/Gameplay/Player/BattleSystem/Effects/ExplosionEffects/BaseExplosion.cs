@@ -90,6 +90,7 @@ public abstract class BaseExplosion : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(objectsInRange);
         foreach(IExplodable obj in objectsInRange){
             try{
                 ExplosionEffect(obj);
